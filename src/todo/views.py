@@ -61,4 +61,4 @@ def task_update(request, pk):
 def task_delete(request, pk):
     task = Task.objects.get(pk = pk)
     task.delete()
-    return Response('Задача удалена.')
+    return Response(f'Задача {task.title} удалена.')
