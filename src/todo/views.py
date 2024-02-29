@@ -38,15 +38,18 @@ def task_details(request, pk):
 
 @api_view(['POST'])
 def task_create(request):
-    serializer = TaskSerializer(data=request.data)
+    serializer = TaskSerializer(data=request.data, many=True)
 
     if serializer.is_valid():
         serializer.save()
-    
-    return Response(serializer.data)
+    else:
+        return Response(f'invalid {serializer.data}')
+    return Response(f'Создано {serializer.data}')
 
 
-@api_view(['POST'])
+
+
+@api_view(['PATCH'])
 def task_update(request, pk):
     task = Task.objects.get(pk = pk)
     serializer = TaskSerializer(instance=task, data=request.data)
@@ -62,3 +65,4 @@ def task_delete(request, pk):
     task = Task.objects.get(pk = pk)
     task.delete()
     return Response(f'Задача {task.title} удалена.')
+
