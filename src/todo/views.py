@@ -46,7 +46,7 @@ def task_create(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['PATCH'])
 def task_update(request, pk):
     task = Task.objects.get(pk = pk)
     serializer = TaskSerializer(instance=task, data=request.data)
