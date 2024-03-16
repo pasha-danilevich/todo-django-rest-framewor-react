@@ -38,13 +38,13 @@ def task_details(request, pk):
 
 @api_view(['POST'])
 def task_create(request):
-    serializer = TaskSerializer(data=request.data, many=True)
+    serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
     else:
         return Response(f'invalid {serializer.data}')
-    return Response(f'Создано {serializer.data}')
+    return Response(serializer.data)
 
 
 
